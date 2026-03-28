@@ -1,0 +1,319 @@
+{
+  // ============================================================
+  //  THEME & APPEARANCE
+  // ============================================================
+  "workbench.colorTheme": "Dark Modern",
+  "workbench.iconTheme": "material-icon-theme",
+
+  // ============================================================
+  //  FONT & EDITOR DISPLAY
+  // ============================================================
+  "editor.fontFamily": "'JetBrains Mono', 'Fira Code', 'Cascadia Code', monospace",
+  "editor.fontSize": 14,
+  "editor.lineHeight": 1.75,
+  "editor.fontLigatures": true,
+
+  "editor.lineNumbers": "on",
+  "editor.renderLineHighlight": "gutter",
+  "editor.renderWhitespace": "boundary",
+  "editor.cursorStyle": "line",
+  "editor.cursorBlinking": "smooth",
+  "editor.cursorWidth": 2,
+  "editor.smoothScrolling": true,
+
+  "editor.bracketPairColorization.enabled": true,
+  "editor.guides.bracketPairs": "active",
+  "editor.guides.indentation": true,
+  "editor.folding": true,
+  "editor.tabSize": 4,
+  "editor.insertSpaces": true,
+  "editor.wordWrap": "off",
+
+  "editor.minimap.enabled": true,
+  "editor.minimap.renderCharacters": false,
+  "editor.minimap.showSlider": "always",
+
+  // ============================================================
+  //  MARKDOWN — 最優先：記法が一目でわかる配色
+  // ============================================================
+  "[markdown]": {
+    "editor.wordWrap": "on",
+    "editor.lineHeight": 1.9,
+    "editor.fontSize": 14,
+    "editor.rulers": [],
+    "editor.tabSize": 2,
+    "editor.defaultFormatter": "yzhang.markdown-all-in-one",
+    "editor.formatOnSave": true,
+    "editor.quickSuggestions": {
+      "comments": "off",
+      "strings": "off",
+      "other": "off"
+    }
+  },
+
+  // Markdown 記法ごとに色を明確に分ける（目にやさしいミュートトーン）
+  "editor.tokenColorCustomizations": {
+    "textMateRules": [
+      // ── 見出し ──────────────────────────────────────────
+      {
+        "scope": "markup.heading.1.markdown",
+        "settings": { "foreground": "#7eb8c9", "fontStyle": "bold" }
+      },
+      {
+        "scope": "markup.heading.2.markdown",
+        "settings": { "foreground": "#88b4a0", "fontStyle": "bold" }
+      },
+      {
+        "scope": "markup.heading.3.markdown",
+        "settings": { "foreground": "#9aaa7a", "fontStyle": "bold" }
+      },
+      {
+        "scope": ["markup.heading.4.markdown", "markup.heading.5.markdown", "markup.heading.6.markdown"],
+        "settings": { "foreground": "#a89070", "fontStyle": "bold" }
+      },
+      // # 記号自体を少し暗く
+      {
+        "scope": "punctuation.definition.heading.markdown",
+        "settings": { "foreground": "#5a7a8a" }
+      },
+
+      // ── コードブロック ``` ───────────────────────────────
+      {
+        "scope": "markup.fenced_code.block.markdown",
+        "settings": { "foreground": "#b5ccb0" }
+      },
+      // バッククォート記号 ``` を目立たせる
+      {
+        "scope": [
+          "punctuation.definition.markdown",
+          "punctuation.definition.raw.markdown"
+        ],
+        "settings": { "foreground": "#7ab87a", "fontStyle": "bold" }
+      },
+      // インラインコード `...`
+      {
+        "scope": "markup.inline.raw.string.markdown",
+        "settings": { "foreground": "#a8c87a", "fontStyle": "" }
+      },
+
+      // ── 太字 ** ─────────────────────────────────────────
+      {
+        "scope": "markup.bold.markdown",
+        "settings": { "foreground": "#e0c882", "fontStyle": "bold" }
+      },
+      // ** 記号
+      {
+        "scope": "punctuation.definition.bold.markdown",
+        "settings": { "foreground": "#c0a040", "fontStyle": "bold" }
+      },
+
+      // ── 斜体 * ──────────────────────────────────────────
+      {
+        "scope": "markup.italic.markdown",
+        "settings": { "foreground": "#c8a8d8", "fontStyle": "italic" }
+      },
+      // * 記号
+      {
+        "scope": "punctuation.definition.italic.markdown",
+        "settings": { "foreground": "#9070aa" }
+      },
+
+      // ── リスト - / * / 1. ───────────────────────────────
+      {
+        "scope": "punctuation.definition.list.begin.markdown",
+        "settings": { "foreground": "#78a8c0", "fontStyle": "bold" }
+      },
+      {
+        "scope": "markup.list.unnumbered.markdown",
+        "settings": { "foreground": "#c8d0d8" }
+      },
+      {
+        "scope": "markup.list.numbered.markdown",
+        "settings": { "foreground": "#c8d0d8" }
+      },
+
+      // ── 引用 > ──────────────────────────────────────────
+      {
+        "scope": "markup.quote.markdown",
+        "settings": { "foreground": "#9ab0a0", "fontStyle": "italic" }
+      },
+      {
+        "scope": "punctuation.definition.quote.begin.markdown",
+        "settings": { "foreground": "#5a8870", "fontStyle": "bold" }
+      },
+
+      // ── リンク ──────────────────────────────────────────
+      {
+        "scope": "string.other.link.title.markdown",
+        "settings": { "foreground": "#7ab0d0" }
+      },
+      {
+        "scope": "markup.underline.link.markdown",
+        "settings": { "foreground": "#5888a8" }
+      },
+      {
+        "scope": [
+          "punctuation.definition.link.markdown",
+          "punctuation.definition.metadata.markdown",
+          "punctuation.definition.string.begin.markdown",
+          "punctuation.definition.string.end.markdown"
+        ],
+        "settings": { "foreground": "#6090b0" }
+      },
+
+      // ── 水平線 --- ──────────────────────────────────────
+      {
+        "scope": "meta.separator.markdown",
+        "settings": { "foreground": "#607878" }
+      },
+
+      // ── Python: 機械学習でよく使うキーワードを読みやすく ──
+      {
+        "scope": ["keyword.control.python", "keyword.control.flow.python"],
+        "settings": { "foreground": "#8ab0d0" }
+      },
+      {
+        "scope": "keyword.operator.python",
+        "settings": { "foreground": "#90b8a0" }
+      },
+      {
+        "scope": "entity.name.function.python",
+        "settings": { "foreground": "#c8b870" }
+      },
+      {
+        "scope": "entity.name.type.class.python",
+        "settings": { "foreground": "#7ab8c8" }
+      },
+      {
+        "scope": ["string.quoted.double.python", "string.quoted.single.python"],
+        "settings": { "foreground": "#a0c090" }
+      },
+      {
+        "scope": "comment.line.number-sign.python",
+        "settings": { "foreground": "#6a8070", "fontStyle": "italic" }
+      }
+    ]
+  },
+
+  // エディター全体のカラーカスタマイズ（目にやさしいウォームダーク）
+  "workbench.colorCustomizations": {
+    "editor.background": "#1e2228",
+    "editor.foreground": "#c8d0d8",
+    "editor.lineHighlightBackground": "#262d36",
+    "editor.selectionBackground": "#3a4a5a",
+    "editor.selectionHighlightBackground": "#2e3d4d",
+    "editor.wordHighlightBackground": "#2a3a4a",
+    "editorLineNumber.foreground": "#4a5a68",
+    "editorLineNumber.activeForeground": "#8a9aaa",
+    "editorIndentGuide.background1": "#2e3840",
+    "editorIndentGuide.activeBackground1": "#4a6070",
+
+    // サイドバー
+    "sideBar.background": "#1a1f26",
+    "sideBarSectionHeader.background": "#1e252e",
+
+    // タブ
+    "tab.activeBackground": "#1e2228",
+    "tab.inactiveBackground": "#181d23",
+    "tab.activeBorder": "#5a8898",
+    "tab.inactiveForeground": "#5a6a78",
+
+    // ターミナル
+    "terminal.background": "#1a1f26",
+    "terminal.foreground": "#c0c8d0",
+
+    // ステータスバー
+    "statusBar.background": "#151a20",
+    "statusBar.foreground": "#8098a8",
+
+    // スクロールバー
+    "scrollbarSlider.background": "#2e3a4466",
+    "scrollbarSlider.hoverBackground": "#3a4a5888"
+  },
+
+  // ============================================================
+  //  MARKDOWN PREVIEW
+  // ============================================================
+  "markdown.preview.fontSize": 15,
+  "markdown.preview.lineHeight": 1.85,
+  "markdown.preview.fontFamily": "'Noto Sans JP', 'Segoe UI', sans-serif",
+  "markdown.extension.toc.levels": "2..4",
+  "markdown.extension.list.indentationSize": "adaptive",
+
+  // ============================================================
+  //  PYTHON (機械学習向け)
+  // ============================================================
+  "[python]": {
+    "editor.defaultFormatter": "ms-python.black-formatter",
+    "editor.formatOnSave": true,
+    "editor.tabSize": 4,
+    "editor.rulers": [88],
+    "editor.wordWrap": "off",
+    "editor.codeActionsOnSave": {
+      "source.organizeImports": "explicit"
+    }
+  },
+  "python.languageServer": "Pylance",
+  "python.analysis.typeCheckingMode": "basic",
+  "python.analysis.autoImportCompletions": true,
+  "python.analysis.inlayHints.variableTypes": true,
+  "python.analysis.inlayHints.functionReturnTypes": true,
+  "black-formatter.args": ["--line-length", "88"],
+  "ruff.enable": true,
+
+  // Jupyter
+  "notebook.lineNumbers": "on",
+  "notebook.output.scrolling": true,
+  "notebook.output.textLineLimit": 50,
+
+  // ============================================================
+  //  TERMINAL
+  // ============================================================
+  "terminal.integrated.fontSize": 13,
+  "terminal.integrated.fontFamily": "'JetBrains Mono', monospace",
+  "terminal.integrated.lineHeight": 1.4,
+  "terminal.integrated.cursorStyle": "line",
+  "terminal.integrated.cursorBlinking": true,
+  "terminal.integrated.scrollback": 5000,
+
+  // ============================================================
+  //  WORKBENCH
+  // ============================================================
+  "workbench.startupEditor": "none",
+  "workbench.editor.highlightModifiedTabs": true,
+  "workbench.editor.enablePreview": false,
+  "workbench.list.smoothScrolling": true,
+  "workbench.tree.indent": 16,
+  "breadcrumbs.enabled": true,
+
+  // ============================================================
+  //  FILE & SAVE
+  // ============================================================
+  "files.autoSave": "onFocusChange",
+  "files.trimTrailingWhitespace": true,
+  "files.insertFinalNewline": true,
+  "files.exclude": {
+    "**/__pycache__": true,
+    "**/.mypy_cache": true,
+    "**/.ruff_cache": true,
+    "**/.ipynb_checkpoints": true,
+    "**/*.pyc": true
+  },
+  "search.exclude": {
+    "**/.git": true,
+    "**/node_modules": true,
+    "**/__pycache__": true,
+    "**/.venv": true,
+    "**/.ipynb_checkpoints": true
+  },
+
+  // ============================================================
+  //  MISC
+  // ============================================================
+  "editor.suggestSelection": "first",
+  "editor.inlineSuggest.enabled": true,
+  "editor.parameterHints.enabled": true,
+  "git.autofetch": true,
+  "explorer.compactFolders": false,
+  "telemetry.telemetryLevel": "off"
+}
