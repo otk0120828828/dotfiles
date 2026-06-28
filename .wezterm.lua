@@ -45,6 +45,8 @@ config.keys = {
 ----------------------------------------------------
 -- 0.0（透明）〜 1.0（不透明）の間で指定します
 config.window_background_opacity = 0.85
+config.front_end = "WebGpu"
+config.webgpu_power_preference = "HighPerformance"
 
 -- ちなみに、すりガラス効果（ブラー）を使いたい場合は以下も有効にしてください
 -- config.win32_system_backdrop = 'Acrylic' 
