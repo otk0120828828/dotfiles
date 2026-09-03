@@ -2,17 +2,16 @@ local wezterm = require 'wezterm'
 local mux = wezterm.mux
 
 ----------------------------------------------------
--- 起動時の画面分割設定（横3列に均等分割）
+-- 起動時の画面分割＆全画面＆ディレクトリ設定
 ----------------------------------------------------
 wezterm.on('gui-startup', function(cmd)
-  -- 1つ目の画面（左側）
-  local tab, pane_left, window = mux.spawn_window(cmd or {})
-  
-  -- 2つ目の画面を右側に50:50で分割
-  local pane_right_top = pane_left:split({ direction = 'Right', size = 0.5 })
-  
-  -- 右側の画面を「上下」に50:50で分割して3つ目の画面を作る
-  local pane_right_bottom = pane_right_top:split({ direction = 'Bottom', size = 0.5 })
+  -- 起動時に開きたいディレクトリのパスを変数に定義
+  local workspace_dir = '/home/superotk/Ubnt_workspace'
+
+  -- 1つ目の画面用のオプションに cwd を設定
+  local window_opts = cmd or {}
+  window_opts.cwd = workspace_dir
+
 end)
 
 -- config_builderを使うと、エラー時のフォールバックが効くため安全です
@@ -21,18 +20,15 @@ local config = wezterm.config_builder()
 -- アクティブウィンドウの切り替えコマンド
 local act = wezterm.action
 config.keys = {
-  -- Alt + 矢印キー でアクティブなペインを移動
   { key = 'LeftArrow',  mods = 'ALT', action = act.ActivatePaneDirection 'Left' },
   { key = 'RightArrow', mods = 'ALT', action = act.ActivatePaneDirection 'Right' },
   { key = 'UpArrow',    mods = 'ALT', action = act.ActivatePaneDirection 'Up' },
   { key = 'DownArrow',  mods = 'ALT', action = act.ActivatePaneDirection 'Down' },
-  -- Ctrl + Alt + Shift + "+" で 上下分割（現在のペインの右側に作成）
   {
     key = '+',
     mods = 'CTRL|ALT|SHIFT',
     action = act.SplitVertical { domain = 'CurrentPaneDomain' },
   },
-  -- Ctrl + Alt + ";" で 左右分割（現在のペインの右側に作成）
   {
     key = ';',
     mods = 'CTRL|ALT',
@@ -43,31 +39,112 @@ config.keys = {
 ----------------------------------------------------
 -- 1. 背景の透過設定
 ----------------------------------------------------
--- 0.0（透明）〜 1.0（不透明）の間で指定します
-config.window_background_opacity = 0.85
+config.window_background_opacity = 0.80
 config.front_end = "WebGpu"
 config.webgpu_power_preference = "HighPerformance"
-
--- ちなみに、すりガラス効果（ブラー）を使いたい場合は以下も有効にしてください
--- config.win32_system_backdrop = 'Acrylic' 
 
 ----------------------------------------------------
 -- 2. 起動時のデフォルトをWSL (Ubuntu) にする
 ----------------------------------------------------
--- WezTermは自動的にWSLを認識し、 'WSL:ディストリビューション名' というドメインを作ります
 config.default_domain = 'WSL:Ubuntu-24.04'
+
+----------------------------------------------------
+-- カラー設定：ミニマルなダークグレー
+----------------------------------------------------
+config.colors = {
+  -- 背景と通常文字
+  foreground = '#D8D8D6',
+  background = '#242526',
+
+  -- カーソル
+  cursor_bg = '#8FAEC4',
+  cursor_fg = '#202122',
+  cursor_border = '#8FAEC4',
+
+  -- 選択範囲
+  selection_fg = '#F0F0EE',
+  selection_bg = '#465866',
+
+  -- スクロールバーとペイン境界
+  scrollbar_thumb = '#55565A',
+  split = '#4A4B4E',
+
+  -- 通常ANSIカラー
+  ansi = {
+    '#303134', -- black
+    '#C76B6B', -- red: エラー
+    '#7FA681', -- green: 成功、Git追加
+    '#C49A55', -- yellow: 警告
+    '#7297B5', -- blue: 情報、リンク
+    '#A484AD', -- magenta
+    '#72A2A2', -- cyan
+    '#C9C9C6', -- white
+  },
+
+  -- 強調ANSIカラー
+  brights = {
+    '#747579', -- コメント、補助情報
+    '#E08080', -- bright red
+    '#95BF97', -- bright green
+    '#DEB56A', -- bright yellow
+    '#89AFCE', -- bright blue
+    '#BD9BC7', -- bright magenta
+    '#89BBBB', -- bright cyan
+    '#F0F0ED', -- bright white
+  },
+
+  -- タブバー
+  tab_bar = {
+    background = '#1E1F20',
+
+    active_tab = {
+      bg_color = '#343538',
+      fg_color = '#EEEEEB',
+      intensity = 'Bold',
+    },
+
+    inactive_tab = {
+      bg_color = '#1E1F20',
+      fg_color = '#898A8C',
+    },
+
+    inactive_tab_hover = {
+      bg_color = '#2B2C2E',
+      fg_color = '#C8C8C5',
+    },
+
+    new_tab = {
+      bg_color = '#1E1F20',
+      fg_color = '#898A8C',
+    },
+
+    new_tab_hover = {
+      bg_color = '#2B2C2E',
+      fg_color = '#C8C8C5',
+    },
+  },
+
+  -- Quick Select
+  quick_select_label_bg = {
+    Color = '#C49A55',
+  },
+  quick_select_label_fg = {
+    Color = '#202122',
+  },
+  quick_select_match_bg = {
+    Color = '#465866',
+  },
+  quick_select_match_fg = {
+    Color = '#F0F0EE',
+  },
+
+  compose_cursor = '#A484AD',
+}
 
 ----------------------------------------------------
 -- 3. その他の基本設定（おすすめ）
 ----------------------------------------------------
--- カラーテーマ（WezTermは数多くのテーマを内蔵しています）
-config.color_scheme = 'Tokyo Night'
-
--- フォント設定（Poderline対応フォントなどがおすすめ）
--- config.font = wezterm.font 'Cica' 
-config.font_size = 12.0
-
--- タブバーのデザインを少し見やすくする
+config.font_size = 10
 config.use_fancy_tab_bar = false
 config.hide_tab_bar_if_only_one_tab = true
 config.tab_bar_at_bottom = true
