@@ -1,0 +1,132 @@
+# ============================================================
+# Ghostty Configuration
+# Minimal Dark / Vivid Text
+# ============================================================
+
+
+# ------------------------------------------------------------
+# Font
+# ------------------------------------------------------------
+
+font-family = JetBrains Mono
+font-size = 12
+
+
+# ------------------------------------------------------------
+# Window
+# ------------------------------------------------------------
+
+# 黒すぎないダークグレー
+background = #242526
+
+# 通常文字はかなり明るめ
+foreground = #F2F2EF
+
+# 背景透過
+background-opacity = 0.86
+
+# ウィンドウ内余白
+window-padding-x = 10
+window-padding-y = 8
+
+# GTK / GNOME に馴染ませる
+window-theme = ghostty
+
+# タイトルバー
+window-titlebar-background = #1E1F20
+window-titlebar-foreground = #F2F2EF
+
+
+# ------------------------------------------------------------
+# Cursor
+# ------------------------------------------------------------
+
+# 少し鮮やかなアイスブルー
+cursor-color = #8FCBFF
+
+# カーソル位置の文字
+cursor-text = #202122
+
+
+# ------------------------------------------------------------
+# Selection
+# ------------------------------------------------------------
+
+selection-foreground = #FFFFFF
+selection-background = #50697A
+
+
+# ------------------------------------------------------------
+# Split / Pane
+# ------------------------------------------------------------
+
+split-divider-color = #55575C
+
+# 非アクティブペインも暗くしすぎない
+unfocused-split-opacity = 0.96
+
+
+# ------------------------------------------------------------
+# ANSI Colors
+#
+# Neovim / shell / git / ls / grep 等で利用される基本色
+# 背景は落ち着かせつつ、文字色だけ鮮明にする
+# ------------------------------------------------------------
+
+# black
+palette = 0=#303134
+
+# red
+# error / failure / deleted
+palette = 1=#F07178
+
+# green
+# success / git added
+palette = 2=#A8D88D
+
+# yellow
+# warning
+palette = 3=#F2C66D
+
+# blue
+# information / links / directory
+palette = 4=#76BDF2
+
+# magenta
+palette = 5=#D69AE8
+
+# cyan
+palette = 6=#6FD6D6
+
+# white
+palette = 7=#E7E7E4
+
+
+# ------------------------------------------------------------
+# Bright ANSI Colors
+# ------------------------------------------------------------
+
+# bright black
+# comment / secondary information
+palette = 8=#85878D
+
+# bright red
+palette = 9=#FF8088
+
+# bright green
+palette = 10=#BCEC9B
+
+# bright yellow
+palette = 11=#FFD778
+
+# bright blue
+palette = 12=#8ACBFF
+
+# bright magenta
+palette = 13=#E5A7F5
+
+# bright cyan
+palette = 14=#82E4E4
+
+# bright white
+palette = 15=#FFFFFF
